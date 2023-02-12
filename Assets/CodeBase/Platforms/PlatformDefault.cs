@@ -1,7 +1,7 @@
 namespace BlackBall.Platforms
 {
-    public class PlatformDefault : Platform
+    public class PlatformDefault : PlatformBase
     {
-        
+        public override string GetItemTypeKey => "Default";
     }
 }
