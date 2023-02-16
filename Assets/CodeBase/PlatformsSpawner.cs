@@ -12,10 +12,12 @@ namespace BlackBall
 {
     public class PlatformsSpawner : CoreBehaviour
     {
-        public List<PlatformBase> ActivePlatforms { get; private set; } = null!;
+        public event Action<PlatformBase>? PlatformSpawned;
+        private List<PlatformBase> _activePlatforms = null!;
         
         [SerializeField] private Field _field = null!;
         [SerializeField] private List<PlatformSpawnSettingInfo> _spawnSettingsInfo = null!;
+        [SerializeField] private BonusSpawner _bonusSpawner = null!;
 
         private PlatformFactory _platformFactory = null!;
         private PlatformsSpawnSettings _currentPlatformsSpawnSettings;
@@ -24,7 +26,8 @@ namespace BlackBall
         private void Awake()
         {
             _platformFactory = new PlatformFactory();
-            ActivePlatforms = new List<PlatformBase>();
+            _activePlatforms = new List<PlatformBase>();
+            _activePlatforms.AddRange(GetComponentsInChildren<PlatformBase>());
             _field.PlatformLeavedGameField += OnPlatformLeavedField;
             _spawnSettingsInfo = _spawnSettingsInfo.OrderBy(info => info.OpensFromScore).ToList();
         }
@@ -32,7 +35,7 @@ namespace BlackBall
         {
             TrySwitchSpawnSettings();
             
-            if (ActivePlatforms.Count == 0 || _field.CanSpawnNewPlatform(ActivePlatforms.Last().transform.position.y))
+            if (_activePlatforms.Count == 0 || _field.CanSpawnNewPlatform(_activePlatforms.Last().transform.position.y))
             {
                 SpawnPlatform();
             }
@@ -41,12 +44,12 @@ namespace BlackBall
         private void OnPlatformLeavedField(PlatformBase platformBase)
         {
             _platformFactory.Delete(platformBase);
-            ActivePlatforms.Remove(platformBase);
+            _activePlatforms.Remove(platformBase);
         }
         private void TrySwitchSpawnSettings()
         {
             if (_spawnSettingsInfo.Count > _nextSpawnSettings 
-                && ServiceLocator.ServiceLocatorInstance.GameScore.Score >= _spawnSettingsInfo[_nextSpawnSettings].OpensFromScore)
+                && ServiceLocator.ServiceLocatorInstance.PerGameData.Score.DistanceScore >= _spawnSettingsInfo[_nextSpawnSettings].OpensFromScore)
             {
                 _currentPlatformsSpawnSettings = _spawnSettingsInfo[_nextSpawnSettings].PlatformsSpawnSettings;
                 _nextSpawnSettings++;
@@ -60,7 +63,9 @@ namespace BlackBall
                 _field.GetRandomPlatformPosition(prefabSize),
                 Quaternion.identity,
                 transform));
-            ActivePlatforms.Add(newPlatform);
+            _activePlatforms.Add(newPlatform);
+            _bonusSpawner.TrySpawnBonus(newPlatform);
+            PlatformSpawned?.Invoke(newPlatform);
         }
         private PlatformBase SelectPlatformPrefab()
         {

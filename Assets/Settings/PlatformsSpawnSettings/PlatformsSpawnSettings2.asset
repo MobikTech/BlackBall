@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17fefcd16e24c5a8c1e07452b7373d6, type: 3}
+  m_Name: PlatformsSpawnSettings2
+  m_EditorClassIdentifier: 
+  _platformsInfo:
+  - PlatformPrefab: {fileID: 5938568737622063278, guid: c3b1e6aff10d22643a0e7695dbdb6a12, type: 3}
+    Probability: 0.5
+  - PlatformPrefab: {fileID: 1000397197061745314, guid: f3dbd37aa1a4cd541a81e45867d22374, type: 3}
+    Probability: 0.5

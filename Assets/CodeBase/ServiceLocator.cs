@@ -1,14 +1,24 @@
-﻿namespace BlackBall
+﻿using BlackBall.Services;
+using BlackBall.Services.SaveLoad;
+using BlackBall.Services.SaveLoad.Serialization;
+
+namespace BlackBall
 {
     public class ServiceLocator
     {
-        public static readonly ServiceLocator ServiceLocatorInstance = new ServiceLocator(new GameScore());
+        public static readonly ServiceLocator ServiceLocatorInstance =
+            new ServiceLocator(new PerGameData(), new PlayerData(), new SaveLoader(new BinarySaveSerializer()));
 
-        public ServiceLocator(GameScore gameScore)
+        public ServiceLocator(PerGameData perGameData, PlayerData playerData, ISaveLoader saveLoader)
         {
-            GameScore = gameScore;
+            PerGameData = perGameData;
+            PlayerData = playerData;
+            SaveLoader = saveLoader;
+            SaveLoader.Load(null, PlayerData);
         }
 
-        public GameScore GameScore { get; }
+        public PerGameData PerGameData { get; }
+        public PlayerData PlayerData { get; }
+        public ISaveLoader SaveLoader { get; }
     }
 }
