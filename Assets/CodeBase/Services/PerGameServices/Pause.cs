@@ -9,6 +9,7 @@ namespace BlackBall.Services.PerGameServices
         public event Action? Unpaused;
         private bool _isPaused;
         
+
         public bool IsPaused
         {
             get => _isPaused;

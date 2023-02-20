@@ -10,6 +10,7 @@ namespace BlackBall
     {
         public event Action? Died;
         [SerializeField] private float _acceleration = 2f;
+        [SerializeField] private ParticleSystem _deathEffect = null!;
         private PlayerInput _playerInput = null!;
         private Rigidbody2D _rigidbody = null!;
 
@@ -27,6 +28,12 @@ namespace BlackBall
             _rigidbody.velocity = new Vector2(xVel, _rigidbody.velocity.y);
         }
 
-        public void TriggerDeath() => Died?.Invoke();
+        public void TriggerDeath()
+        {
+            Died?.Invoke();
+            _deathEffect.Play();
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<TrailRenderer>().enabled = false;
+        }
     }
 }
