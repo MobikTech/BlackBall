@@ -34,7 +34,8 @@ namespace BlackBall.UI.Views.LevelScene
                 null, ServiceLocator.ServiceLocatorInstance.PlayerData);
 
                 ServiceLocator.ServiceLocatorInstance.PerGameData.Reset();
-            SceneManager.LoadScene("Menu");
+                
+            ServiceLocator.ServiceLocatorInstance.SceneLoader.Load("Menu");
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BlackBall
         public event Action? Died;
         [SerializeField] private float _acceleration = 2f;
         [SerializeField] private ParticleSystem _deathEffect = null!;
+        [SerializeField] private ParticleSystem _hitEffect = null!;
         private PlayerInput _playerInput = null!;
         private Rigidbody2D _rigidbody = null!;
 
@@ -28,10 +29,20 @@ namespace BlackBall
             _rigidbody.velocity = new Vector2(xVel, _rigidbody.velocity.y);
         }
 
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag("Platform"))
+            {
+                _hitEffect.Play();
+                ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play("BallHit");
+            }
+        }
+
         public void TriggerDeath()
         {
             Died?.Invoke();
             _deathEffect.Play();
+            ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play("Death");
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<TrailRenderer>().enabled = false;
         }

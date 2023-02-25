@@ -29,7 +29,7 @@ namespace BlackBall.UI.Views.MenuScene
 
         private void GoToLevel()
         {
-            SceneManager.LoadScene("Level");
+            ServiceLocator.ServiceLocatorInstance.SceneLoader.Load("Level");
         }
 
         private void SwitchToShopView()

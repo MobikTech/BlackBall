@@ -28,6 +28,7 @@ namespace BlackBall.Bonuses
             {
                 _despawnAction.Invoke(this);
                 HandleBonus();
+                ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play("PickUp");
             }
         }
     }
