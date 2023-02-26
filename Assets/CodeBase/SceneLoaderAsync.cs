@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,17 +9,21 @@ namespace BlackBall
     {
         [SerializeField] private GameObject _loadingScreen = null!;
         
-        public void Load(string sceneName)
+        public void Load(string sceneName, Action? callback = null)
         {
-            StartCoroutine(LoadSceneAsync(sceneName));
+            StartCoroutine(LoadSceneAsync(sceneName, callback));
         }
 
-        private IEnumerator LoadSceneAsync(string sceneName)
+        private IEnumerator LoadSceneAsync(string sceneName, Action? callback)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
             _loadingScreen.SetActive(true);
-            operation.completed += _ => _loadingScreen.SetActive(false);
+            operation.completed += _ =>
+            {
+                _loadingScreen.SetActive(false);
+                callback?.Invoke();
+            };
             yield break;
         }
     }

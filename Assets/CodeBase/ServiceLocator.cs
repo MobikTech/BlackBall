@@ -18,6 +18,7 @@ namespace BlackBall
             SaveLoader = saveLoader;
             SoundsPlayer = Object.FindObjectOfType<SoundsPlayer>();
             SceneLoader = Object.FindObjectOfType<SceneLoaderAsync>();
+            SaveLoader.TryCreateSaveFile();
             SaveLoader.Load(null, PlayerData);
         }
 

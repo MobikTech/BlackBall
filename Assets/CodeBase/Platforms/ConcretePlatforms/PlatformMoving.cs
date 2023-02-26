@@ -2,7 +2,6 @@
 
 namespace BlackBall.Platforms.ConcretePlatforms
 {
-    [RequireComponent(typeof(BoxCollider2D))]
     public class PlatformMoving : PlatformBase
     {
         public override string GetItemTypeKey => "Moving";

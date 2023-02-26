@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bonusesInfo:
   - BonusPrefab: {fileID: 3023022335426801229, guid: 91fd1fc450d74be4e8a8264c3c0f1bc6, type: 3}
-    Probability: 0.2
+    Probability: 0.1

@@ -8,6 +8,7 @@ namespace BlackBall
     {
         [SerializeField] private PlatformsSpawner _platformsSpawner = null!;
         [SerializeField] private float _fieldSpeed = 0.5f;
+        [SerializeField] private float _scoreFactor = 1.5f;
         
         private void Start()
         {
@@ -18,7 +19,7 @@ namespace BlackBall
 
         private void OnPlatformSpawned(PlatformBase platform)
         {
-            var rigidbody = platform.GetComponent<Rigidbody2D>();
+            var rigidbody = platform.GetComponentInChildren<Rigidbody2D>();
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, _fieldSpeed); 
         }
 
@@ -26,7 +27,7 @@ namespace BlackBall
         {
             while (true)
             {
-                float passedDistance = _fieldSpeed * Time.deltaTime;
+                float passedDistance = _fieldSpeed * Time.deltaTime * _scoreFactor;
 
                 ServiceLocator.ServiceLocatorInstance.PerGameData.Score.UpdateScore(passedDistance);
                 yield return null;

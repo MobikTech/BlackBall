@@ -41,7 +41,11 @@ namespace BlackBall.Bonuses
             }
 
             _bonusFactory.Create(bonusPrefab!, new BonusCreationOptions(platform.BonusSpawnPoint.position, Quaternion.identity,
-                platform.transform, bonus => _bonusFactory.Delete(bonus)));
+                platform.transform, bonus =>
+                {
+                    
+                    _bonusFactory.Delete(bonus);
+                }));
             return true;
         }
 

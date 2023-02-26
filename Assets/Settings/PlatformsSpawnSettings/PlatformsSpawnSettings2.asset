@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _platformsInfo:
   - PlatformPrefab: {fileID: 5938568737622063278, guid: c3b1e6aff10d22643a0e7695dbdb6a12, type: 3}
-    Probability: 0.5
-  - PlatformPrefab: {fileID: 1000397197061745314, guid: f3dbd37aa1a4cd541a81e45867d22374, type: 3}
-    Probability: 0.5
+    Probability: 0.7
+  - PlatformPrefab: {fileID: 7755689836978785876, guid: 9cb5f343a5b248a4582d1ca366dc6a0b, type: 3}
+    Probability: 0.3

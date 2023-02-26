@@ -17,7 +17,13 @@ namespace BlackBall.Services.SaveLoad
         private readonly ISaveSerializer _saveSerializer;
         private readonly string _savePath = Path.Combine(Application.persistentDataPath, "Save.dat");
         private Data _currentData;
-        
+
+        public void TryCreateSaveFile()
+        {
+            if (!File.Exists(_savePath))
+                _saveSerializer.Serialize(_currentData, _savePath);
+        }
+
         public void Save(Action? callback, params IPersistentData[] persistentData)
         {
             persistentData.ToList().ForEach(data => data.SaveData(ref _currentData));

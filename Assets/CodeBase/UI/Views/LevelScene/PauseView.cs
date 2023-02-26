@@ -28,14 +28,21 @@ namespace BlackBall.UI.Views.LevelScene
 
         private void LeaveToMenu()
         {
+            BeforeNewSceneLoaded();
+            ServiceLocator.ServiceLocatorInstance.SceneLoader.Load("Menu", OnNewSceneLoaded);
+        }
+        
+        private void BeforeNewSceneLoaded()
+        {
             ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(
                 null, ServiceLocator.ServiceLocatorInstance.PerGameData);
             ServiceLocator.ServiceLocatorInstance.SaveLoader.Load(
                 null, ServiceLocator.ServiceLocatorInstance.PlayerData);
+        }
 
-                ServiceLocator.ServiceLocatorInstance.PerGameData.Reset();
-                
-            ServiceLocator.ServiceLocatorInstance.SceneLoader.Load("Menu");
+        private void OnNewSceneLoaded()
+        {
+            ServiceLocator.ServiceLocatorInstance.PerGameData.Reset();
         }
     }
 }

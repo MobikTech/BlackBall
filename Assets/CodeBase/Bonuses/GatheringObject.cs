@@ -1,6 +1,7 @@
 ﻿using System;
 using BlackBall.Core;
 using BlackBall.Factories.Core;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BlackBall.Bonuses
@@ -26,7 +27,12 @@ namespace BlackBall.Bonuses
         {
             if (col.gameObject.TryGetComponent(out BallController ballController))
             {
-                _despawnAction.Invoke(this);
+                var lastScale = transform.localScale;
+                transform.DOScale(0f, 0.2f).SetEase(Ease.InBack).OnComplete(() =>
+                {
+                    _despawnAction.Invoke(this);
+                    transform.localScale = lastScale;
+                });
                 HandleBonus();
                 ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play("PickUp");
             }
