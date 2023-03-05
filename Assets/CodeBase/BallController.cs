@@ -12,7 +12,7 @@ namespace BlackBall
     public class BallController : CoreBehaviour
     {
         public event Action? Died;
-        [SerializeField] private float _acceleration = 2f;
+        // [SerializeField] private float _acceleration = 50f;
         [SerializeField] private float _maxSpeed = 1f;
         [SerializeField] private ParticleSystem _deathEffect = null!;
         [SerializeField] private ParticleSystem _hitEffect = null!;
@@ -27,9 +27,11 @@ namespace BlackBall
 
         private void Update()
         {
-            float movementValue = _playerInput.actions["Movement"].ReadValue<Vector2>().x;
-            float xVel = 0.9f * _rigidbody.velocity.x + movementValue * _acceleration * Time.deltaTime;
-            xVel = Mathf.Clamp(xVel, -_maxSpeed, _maxSpeed);
+            float movementValue = _playerInput.actions["Movement"].ReadValue<Vector2>().normalized.x;
+            
+            float xVel = movementValue * _maxSpeed;
+            // float xVel = 0.9f * _rigidbody.velocity.x + movementValue * _acceleration * Time.deltaTime;
+            // xVel = Mathf.Clamp(xVel, -_maxSpeed, _maxSpeed);
             _rigidbody.velocity = new Vector2(xVel, _rigidbody.velocity.y);
         }
 
