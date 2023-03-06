@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BlackBall
+namespace BlackBall.AspectRatioScripts
 {
     public class LetterBoxer : MonoBehaviour
     {    
@@ -58,7 +58,7 @@ namespace BlackBall
             {             
                 if (camera.depth == -100)
                 {
-                    Debug.LogError("Found " + camera.name + " with a depth of -100. Will cause letter boxing issues. Please increase it's depth.");
+                    UnityEngine.Debug.LogError("Found " + camera.name + " with a depth of -100. Will cause letter boxing issues. Please increase it's depth.");
                 }
             }
 

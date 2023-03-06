@@ -47,8 +47,6 @@ namespace BlackBall
 
             float velocityX = GetMovementVelocityX();
             
-            //todo remove
-            Debug.Log(velocityX);
             _rigidbody.velocity = new Vector2(velocityX, _rigidbody.velocity.y);
         }
 
@@ -72,7 +70,6 @@ namespace BlackBall
             bool isPressed = _playerInput.actions["IsTouching"].IsPressed();
             Vector3 touchWorldPosition = _camera.ScreenToWorldPoint(new Vector3(screenPositionX, 0f, _camera.nearClipPlane));
 
-            Debug.Log(touchWorldPosition.x);
             float sign = 0f;
             if (isPressed && !AreEqual(touchWorldPosition.x, transform.position.x, 0.01f))
             {

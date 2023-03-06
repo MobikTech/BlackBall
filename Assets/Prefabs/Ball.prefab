@@ -5040,10 +5040,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0837b29f21e147458110c4627362246c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 100
+  _acceleration: 200
   _maxSpeed: 1
   _deathEffect: {fileID: 3836485826831249210}
   _hitEffect: {fileID: 8531503559923983146}
+  _camera: {fileID: 0}
 --- !u!96 &353599272134546880
 TrailRenderer:
   serializedVersion: 2

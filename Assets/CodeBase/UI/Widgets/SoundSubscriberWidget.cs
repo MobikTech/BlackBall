@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using BlackBall.UI.Core;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace BlackBall
+namespace BlackBall.UI.Widgets
 {
     [RequireComponent(typeof(Button))]
-    public class ButtonSoundSubscriber : MonoBehaviour
+    public class SoundSubscriberWidget : UIWidget
     {
         [SerializeField] private string _soundName = null!;
 
-        private void Awake()
+        internal override void Initialize()
         {
+            base.Initialize();
             GetComponent<Button>().onClick.AddListener(
                 () => ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play(_soundName));
         }

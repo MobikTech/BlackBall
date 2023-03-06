@@ -10,6 +10,7 @@ namespace BlackBall.Platforms.ConcretePlatforms
         {
             if (col.collider.TryGetComponent(out BallController ballController))
             {
+                ServiceLocator.ServiceLocatorInstance.PerGameData.Pause.IsPaused = true;
                 ballController.TriggerDeath();
             }
         }
