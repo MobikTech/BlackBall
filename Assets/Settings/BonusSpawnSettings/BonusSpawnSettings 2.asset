@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 612b46555dc347a48be076c8cb5c4d48, type: 3}
-  m_Name: BonusSpawnSettings 1
+  m_Name: BonusSpawnSettings 2
   m_EditorClassIdentifier: 
   _bonusesInfo:
   - BonusPrefab: {fileID: 3023022335426801229, guid: 91fd1fc450d74be4e8a8264c3c0f1bc6, type: 3}
-    Probability: 0.05
+    Probability: 0.1

@@ -13,18 +13,17 @@ namespace BlackBall
         {
             StartCoroutine(LoadSceneAsync(sceneName, callback));
         }
-
+        
         private IEnumerator LoadSceneAsync(string sceneName, Action? callback)
         {
-            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-
             _loadingScreen.SetActive(true);
-            operation.completed += _ =>
-            {
-                _loadingScreen.SetActive(false);
-                callback?.Invoke();
-            };
-            yield break;
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        
+            while (!operation.isDone) yield return null;
+            callback?.Invoke();
+            
+            yield return new WaitForSeconds(0.2f);
+            _loadingScreen.SetActive(false);
         }
     }
 }

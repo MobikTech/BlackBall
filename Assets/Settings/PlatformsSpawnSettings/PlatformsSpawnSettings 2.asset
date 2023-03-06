@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e17fefcd16e24c5a8c1e07452b7373d6, type: 3}
-  m_Name: PlatformsSpawnSettings2
+  m_Name: PlatformsSpawnSettings 2
   m_EditorClassIdentifier: 
   _platformsInfo:
   - PlatformPrefab: {fileID: 5938568737622063278, guid: c3b1e6aff10d22643a0e7695dbdb6a12, type: 3}

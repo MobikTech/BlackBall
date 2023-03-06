@@ -8,7 +8,6 @@ namespace BlackBall.Platforms.ConcretePlatforms
         
         [SerializeField] private float _speed = 0.5f;
         [SerializeField] private string _fieldBorderTag = null!;
-        // [SerializeField] private string _ballTag = null!;
         
         private float _direction;
         private Rigidbody2D _rigidbody = null!;
