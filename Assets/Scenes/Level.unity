@@ -6473,7 +6473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0038204fa5634df68ba7dfee4c482957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startWidgets: []
+  _startWidgets:
+  - {fileID: 1980151886}
+  - {fileID: 631634523}
   _continueButton: {fileID: 1980151883}
   _leaveButton: {fileID: 631634520}
 --- !u!1 &631634518
@@ -7071,6 +7073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startWidgets:
   - {fileID: 1179693814}
+  - {fileID: 265490674}
   - {fileID: 618236200}
   _pauseButton: {fileID: 265490671}
   _ballController: {fileID: 1468703769}
@@ -9780,7 +9783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb2448362c94476a66571d2f7fdef12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startWidgets: []
+  _startWidgets:
+  - {fileID: 1781249654}
+  - {fileID: 1282733979}
   _retryButton: {fileID: 1781249651}
   _menuButton: {fileID: 1282733976}
 --- !u!4 &6178111344803618488

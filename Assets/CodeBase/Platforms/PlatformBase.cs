@@ -1,20 +1,13 @@
-﻿using BlackBall.Core;
-using BlackBall.Factories.Core;
+﻿using Mobik.Common.Core;
+using Mobik.Common.Utilities.PoolingFactory.Abstr;
 using UnityEngine;
 
 namespace BlackBall.Platforms
 {
-    public abstract class PlatformBase : CoreBehaviour, IPoolItem<DefaultGOCreationOptions>
+    public abstract class PlatformBase : MonoBehaviourCached, IPoolItem
     {
         public abstract string GetItemTypeKey { get; }
         [field:SerializeField] public bool CanSpawnBonuses { get; private set; }
         [field:SerializeField] public Transform BonusSpawnPoint { get; private set; } = null!;
-
-        public void SetupCreationOptions(DefaultGOCreationOptions creationOptions)
-        {
-            transform.parent = creationOptions.Parent;
-            transform.position = creationOptions.SpawnPoint;
-            transform.rotation = creationOptions.Rotation;
-        }
     }
 }

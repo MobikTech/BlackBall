@@ -17129,7 +17129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16093c2c47bd4488adbc52826b566722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startWidgets: []
+  _startWidgets:
+  - {fileID: 1771139039}
   _backButton: {fileID: 1771139036}
   _moneyText: {fileID: 828641484}
 --- !u!1 &1293351614
@@ -22447,7 +22448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284b576fc7a041f18143057a80140a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startWidgets: []
+  _startWidgets:
+  - {fileID: 81124435}
+  - {fileID: 1131295837}
+  - {fileID: 660625907}
   _playButton: {fileID: 81124432}
   _shopButton: {fileID: 1131295834}
   _exitButton: {fileID: 660625904}

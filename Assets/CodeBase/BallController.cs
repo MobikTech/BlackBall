@@ -1,16 +1,16 @@
 ﻿using System;
-using BlackBall.Core;
 using BlackBall.Platforms;
 using BlackBall.Platforms.ConcretePlatforms;
 using DG.Tweening;
+using Mobik.Common.Core;
+using Mobik.Common.Extensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static BlackBall.Common.Math.MathAddition;
 
 namespace BlackBall
 {
     [RequireComponent(typeof(PlayerInput), typeof(Rigidbody2D))]
-    public class BallController : CoreBehaviour
+    public class BallController : MonoBehaviourCached
     {
         public event Action? Died;
         [SerializeField] private float _acceleration = 50f;
@@ -46,7 +46,7 @@ namespace BlackBall
             // _rigidbody.velocity = new Vector2(xVel, _rigidbody.velocity.y);
 
             float velocityX = GetMovementVelocityX();
-            
+
             _rigidbody.velocity = new Vector2(velocityX, _rigidbody.velocity.y);
         }
 
@@ -68,13 +68,16 @@ namespace BlackBall
         {
             float screenPositionX = _playerInput.actions["TouchPositionX"].ReadValue<float>();
             bool isPressed = _playerInput.actions["IsTouching"].IsPressed();
-            Vector3 touchWorldPosition = _camera.ScreenToWorldPoint(new Vector3(screenPositionX, 0f, _camera.nearClipPlane));
+            Vector3 touchWorldPosition =
+                _camera.ScreenToWorldPoint(new Vector3(screenPositionX, 0f, _camera.nearClipPlane));
 
             float sign = 0f;
-            if (isPressed && !AreEqual(touchWorldPosition.x, transform.position.x, 0.01f))
+            UnityEngine.Debug.Log(isPressed);
+            if (isPressed && !touchWorldPosition.x.EqualsApproximately(transform.position.x, 1f));
             {
-                sign = GetSign(touchWorldPosition.x - transform.position.x);
+                sign = (touchWorldPosition.x - transform.position.x).GetSign();
             }
+            UnityEngine.Debug.Log(sign);
 
             return sign * _maxSpeed;
         }

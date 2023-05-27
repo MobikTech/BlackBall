@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlackBall.Common.Extensions;
-using BlackBall.Core;
+using Mobik.Common.Core;
+using Mobik.Common.Extensions;
 using UnityEngine;
 
 namespace BlackBall.Audio
 {
-    public class SoundsPlayer : CoreBehaviour
+    public class SoundsPlayer : MonoBehaviourCached
     {
         [SerializeField] private List<Sound> _sounds = null!;
         private Dictionary<string, AudioSource> _sources = new Dictionary<string, AudioSource>();

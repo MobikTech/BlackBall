@@ -1,13 +1,13 @@
 ﻿using System;
-using BlackBall.Core;
 using BlackBall.Platforms;
+using Mobik.Common.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace BlackBall
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class Field : CoreBehaviour
+    public class Field : MonoBehaviourCached
     {
         public event Action<PlatformBase>? PlatformLeavedGameField;
         

@@ -1,7 +1,6 @@
 using System;
-using BlackBall.UI.Core;
+using Mobik.Common.Utilities.UIFramework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace BlackBall.UI.Views.LevelScene
@@ -9,13 +8,12 @@ namespace BlackBall.UI.Views.LevelScene
     public class PauseView : UIView
     {
         public override Type ActualType => typeof(PauseView);
-        
+
         [SerializeField] private Button _continueButton = null!;
         [SerializeField] private Button _leaveButton = null!;
 
-        internal override void Initialize(IViewVisualizer viewVisualizer)
+        public override void Initialize()
         {
-            base.Initialize(viewVisualizer);
             _continueButton.onClick.AddListener(ContinueGame);
             _leaveButton.onClick.AddListener(LeaveToMenu);
         }

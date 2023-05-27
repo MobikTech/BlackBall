@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using BlackBall.Bonuses;
-using BlackBall.Common.Math;
-using BlackBall.Core;
 using BlackBall.Factories;
-using BlackBall.Factories.Core;
 using BlackBall.Settings;
+using Mobik.Common.Core;
+using Mobik.Common.Utilities.PoolingFactory.Core;
 using UnityEngine;
+using Random = Mobik.Common.Math.Random;
 
 namespace BlackBall.Platforms
 {
-    public class PlatformsSpawner : CoreBehaviour
+    public class PlatformsSpawner : MonoBehaviourCached
     {
         public event Action<PlatformBase>? PlatformSpawned;
         private List<PlatformBase> _activePlatforms = null!;
@@ -60,10 +60,13 @@ namespace BlackBall.Platforms
         {
             PlatformBase prefab = SelectPlatformPrefab();
             Vector3 prefabSize = prefab.transform.localScale;
-            PlatformBase newPlatform = _platformFactory.Create(prefab, new DefaultGOCreationOptions(
+            DefaultGOCreationOptions<PlatformBase> creationOptions = new DefaultGOCreationOptions<PlatformBase>(
+                prefab,
                 _field.GetRandomPlatformPosition(prefabSize),
                 Quaternion.identity,
-                transform));
+                transform);
+            
+            PlatformBase newPlatform = _platformFactory.Create(creationOptions);
             _activePlatforms.Add(newPlatform);
             _bonusSpawner.TrySpawnBonus(newPlatform);
             PlatformSpawned?.Invoke(newPlatform);
@@ -73,7 +76,7 @@ namespace BlackBall.Platforms
             float totalProbability = 0f;
             foreach (PlatformInfo platformInfo in _currentPlatformsSpawnSettings.PlatformsInfo)
             {
-                if (RandomAddition.IsTruth(platformInfo.Probability + totalProbability))
+                if (Random.IsTruth(platformInfo.Probability + totalProbability))
                 {
                     return platformInfo.PlatformPrefab;
                 }

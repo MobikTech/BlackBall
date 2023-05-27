@@ -1,6 +1,6 @@
 ﻿using System;
-using BlackBall.Core;
-using BlackBall.UI.Core;
+using Mobik.Common.Core;
+using Mobik.Common.Utilities.UIFramework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,17 +10,14 @@ namespace BlackBall.UI.Views.MenuScene
     public class ShopView : UIView
     {
         public override Type ActualType => typeof(ShopView);
-        
+
         [SerializeField] private Button _backButton = null!;
         [SerializeField] private TMP_Text _moneyText = null!;
 
-        internal override void Initialize(IViewVisualizer viewVisualizer)
+        public override void Initialize()
         {
-            base.Initialize(viewVisualizer);
-            
             _backButton.onClick.AddListener(GoBack);
             ServiceLocator.ServiceLocatorInstance.PlayerData.MoneyUpdated += OnMoneyUpdated;
-            
             _moneyText.text = ServiceLocator.ServiceLocatorInstance.PlayerData.PlayerTotalMoney.ToString();
         }
 

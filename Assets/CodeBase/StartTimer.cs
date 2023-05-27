@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
-using BlackBall.Core;
 using DG.Tweening;
+using Mobik.Common.Core;
 using TMPro;
 using UnityEngine;
 
 namespace BlackBall
 {
-    public class StartTimer : CoreBehaviour
+    public class StartTimer : MonoBehaviourCached
     {
         [SerializeField] private int _seconds;
         [SerializeField] private TMP_Text _timerText = null!;

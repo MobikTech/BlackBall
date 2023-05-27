@@ -1,7 +1,6 @@
 ﻿using System;
-using BlackBall.UI.Core;
+using Mobik.Common.Utilities.UIFramework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace BlackBall.UI.Views.LevelScene
@@ -9,13 +8,12 @@ namespace BlackBall.UI.Views.LevelScene
     public class GameOverView : UIView
     {
         public override Type ActualType => typeof(GameOverView);
-        
+
         [SerializeField] private Button _retryButton = null!;
         [SerializeField] private Button _menuButton = null!;
 
-        internal override void Initialize(IViewVisualizer viewVisualizer)
+        public override void Initialize()
         {
-            base.Initialize(viewVisualizer);
             _retryButton.onClick.AddListener(RetryGame);
             _menuButton.onClick.AddListener(LeaveToMenu);
         }

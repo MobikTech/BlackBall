@@ -1,0 +1,3 @@
+[submodule "Assets/Submodules/CommonUnityScripts"]
+	path = Assets/Submodules/CommonUnityScripts
+	url = https://github.com/MobikTech/CommonUnityScripts

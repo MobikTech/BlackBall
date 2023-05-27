@@ -1,4 +1,4 @@
-﻿using BlackBall.UI.Core;
+﻿using Mobik.Common.Utilities.UIFramework;
 using TMPro;
 using UnityEngine;
 
@@ -8,9 +8,8 @@ namespace BlackBall.UI.Widgets
     {
         [SerializeField] private TMP_Text _scoreText = null!;
 
-        internal override void Initialize()
+        public override void Initialize()
         {
-            base.Initialize();
             ServiceLocator.ServiceLocatorInstance.PerGameData.Score.ScoreUpdated += OnScoreUpdated;
         }
 

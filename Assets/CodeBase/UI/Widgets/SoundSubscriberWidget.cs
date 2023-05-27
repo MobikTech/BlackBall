@@ -1,4 +1,4 @@
-﻿using BlackBall.UI.Core;
+﻿using Mobik.Common.Utilities.UIFramework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +9,9 @@ namespace BlackBall.UI.Widgets
     {
         [SerializeField] private string _soundName = null!;
 
-        internal override void Initialize()
+        public override void Initialize()
         {
-            base.Initialize();
-            GetComponent<Button>().onClick.AddListener(
-                () => ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play(_soundName));
+            GetComponent<Button>().onClick.AddListener(() => ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play(_soundName));
         }
     }
 }

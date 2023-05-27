@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BlackBall.Common.Math;
-using BlackBall.Core;
 using BlackBall.Factories;
 using BlackBall.Platforms;
 using BlackBall.Services.PerGameServices;
 using BlackBall.Settings;
+using Mobik.Common.Core;
 using UnityEngine;
+using Random = Mobik.Common.Math.Random;
 
 namespace BlackBall.Bonuses
 {
-    public class BonusSpawner  : CoreBehaviour
+    public class BonusSpawner  : MonoBehaviourCached
     {
         [SerializeField] private List<BonusSpawnSettingInfo> _spawnSettingsInfo = null!;
         
@@ -40,12 +40,14 @@ namespace BlackBall.Bonuses
                 return false;
             }
 
-            _bonusFactory.Create(bonusPrefab!, new BonusCreationOptions(platform.BonusSpawnPoint.position, Quaternion.identity,
-                platform.transform, bonus =>
-                {
-                    
-                    _bonusFactory.Delete(bonus);
-                }));
+            BonusCreationOptions bonusCreationOptions = new BonusCreationOptions(
+                bonusPrefab, 
+                platform.BonusSpawnPoint.position, 
+                Quaternion.identity,
+                platform.transform, 
+                bonus => _bonusFactory.Delete(bonus));
+
+            _bonusFactory.Create(bonusCreationOptions);
             return true;
         }
 
@@ -64,7 +66,7 @@ namespace BlackBall.Bonuses
             float totalProbability = 0f;
             foreach (BonusInfo bonusInfo in _currentBonusesSpawnSettings.BonusesInfo)
             {
-                if (RandomAddition.IsTruth(bonusInfo.Probability + totalProbability))
+                if (Random.IsTruth(bonusInfo.Probability + totalProbability))
                 {
                     bonusPrefab = bonusInfo.BonusPrefab;
                     return true;

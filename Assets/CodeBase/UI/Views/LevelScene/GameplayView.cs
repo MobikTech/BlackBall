@@ -1,6 +1,6 @@
 ﻿using System;
-using BlackBall.Core;
-using BlackBall.UI.Core;
+using Mobik.Common.Core;
+using Mobik.Common.Utilities.UIFramework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +13,8 @@ namespace BlackBall.UI.Views.LevelScene
         [SerializeField] private Button _pauseButton = null!;
         [SerializeField] private BallController _ballController = null!;
 
-        internal override void Initialize(IViewVisualizer viewVisualizer)
+        public override void Initialize()
         {
-            base.Initialize(viewVisualizer);
             _pauseButton.onClick.AddListener(PauseGame);
             _ballController.Died += OnBallDied;
         }
@@ -30,6 +29,5 @@ namespace BlackBall.UI.Views.LevelScene
             ServiceLocator.ServiceLocatorInstance.PerGameData.Pause.IsPaused = true;
             _viewVisualizer.Visualize<PauseView, IOptions>(IOptions.NoneOptions);
         }
-
     }
 }

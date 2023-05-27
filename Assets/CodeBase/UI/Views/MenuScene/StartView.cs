@@ -1,9 +1,8 @@
 ﻿using System;
-using BlackBall.Core;
-using BlackBall.UI.Core;
+using Mobik.Common.Core;
+using Mobik.Common.Utilities.UIFramework;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace BlackBall.UI.Views.MenuScene
@@ -11,15 +10,14 @@ namespace BlackBall.UI.Views.MenuScene
     public class StartView : UIView
     {
         public override Type ActualType => typeof(StartView);
-        
+
         [SerializeField] private Button _playButton = null!;
         [SerializeField] private Button _shopButton = null!;
         [SerializeField] private Button _exitButton = null!;
         [SerializeField] private TMP_Text _recordText = null!;
-        
-        internal override void Initialize(IViewVisualizer viewVisualizer)
+    
+        public override void Initialize()
         {
-            base.Initialize(viewVisualizer);
             _playButton.onClick.AddListener(GoToLevel);
             _shopButton.onClick.AddListener(SwitchToShopView);
             _exitButton.onClick.AddListener(ExitGame);
