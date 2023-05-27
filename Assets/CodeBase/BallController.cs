@@ -72,12 +72,10 @@ namespace BlackBall
                 _camera.ScreenToWorldPoint(new Vector3(screenPositionX, 0f, _camera.nearClipPlane));
 
             float sign = 0f;
-            UnityEngine.Debug.Log(isPressed);
-            if (isPressed && !touchWorldPosition.x.EqualsApproximately(transform.position.x, 1f));
+            if (isPressed && !touchWorldPosition.x.EqualsApproximately(transform.position.x, 0.01f))
             {
                 sign = (touchWorldPosition.x - transform.position.x).GetSign();
             }
-            UnityEngine.Debug.Log(sign);
 
             return sign * _maxSpeed;
         }
