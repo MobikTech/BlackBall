@@ -748,7 +748,7 @@ PlayerSettings:
     Game Performance: 0
     Purchasing: 0
     UDP: 0
-    Unity Ads: 0
+    Unity Ads: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -763,10 +763,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: d6a7c55a-764b-423b-bb8c-b5d838e04052
+  cloudProjectId: bfbc68f9-6c92-4fe5-855c-b121add3c7cd
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: BlackBall (2)
+  projectName: BlackBall
   organizationId: mobi_serg
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

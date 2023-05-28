@@ -18,17 +18,10 @@ namespace BlackBall
         [SerializeField] private ParticleSystem _deathEffect = null!;
         [SerializeField] private ParticleSystem _hitEffect = null!;
         [SerializeField] private Camera _camera = null!;
+        [SerializeField] private PlatformsSpawner _platformsSpawner = null!;
+
         private PlayerInput _playerInput = null!;
         private Rigidbody2D _rigidbody = null!;
-
-        public void TriggerDeath()
-        {
-            Died?.Invoke();
-            _deathEffect.Play();
-            ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play("Death");
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<TrailRenderer>().enabled = false;
-        }
 
         private void Awake()
         {
@@ -38,15 +31,7 @@ namespace BlackBall
 
         private void Update()
         {
-            // float movementValue = _playerInput.actions["Movement"].ReadValue<Vector2>().normalized.x;
-            //
-            // // float xVel = movementValue * _maxSpeed;
-            // float xVel = 0.9f * _rigidbody.velocity.x + movementValue * _acceleration * Time.deltaTime;
-            // xVel = Mathf.Clamp(xVel, -_maxSpeed, _maxSpeed);
-            // _rigidbody.velocity = new Vector2(xVel, _rigidbody.velocity.y);
-
             float velocityX = GetMovementVelocityX();
-
             _rigidbody.velocity = new Vector2(velocityX, _rigidbody.velocity.y);
         }
 
@@ -62,6 +47,22 @@ namespace BlackBall
                     ? "SlimeBallHit"
                     : "DeafBallHit");
             }
+        }
+
+        public void TriggerDeath()
+        {
+            Died?.Invoke();
+            _deathEffect.Play();
+            ServiceLocator.ServiceLocatorInstance.SoundsPlayer.Play("Death");
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<TrailRenderer>().enabled = false;
+        }
+
+        public void RevivePlayerBall()
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<TrailRenderer>().enabled = true;
+            transform.position = _platformsSpawner.LowestPlatform.BonusSpawnPoint.position;
         }
 
         private float GetMovementVelocityX()

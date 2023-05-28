@@ -1,4 +1,5 @@
 ﻿using System;
+using BlackBall.UI.Widgets;
 using Mobik.Common.Utilities.UIFramework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +12,19 @@ namespace BlackBall.UI.Views.LevelScene
 
         [SerializeField] private Button _retryButton = null!;
         [SerializeField] private Button _menuButton = null!;
+        [SerializeField] private ContinueWithAdsWidget _continueWithAdsButton = null!;
 
         public override void Initialize()
         {
             _retryButton.onClick.AddListener(RetryGame);
             _menuButton.onClick.AddListener(LeaveToMenu);
+            _continueWithAdsButton.AdsCompleted += UnpauseGame;
+        }
+
+        private void UnpauseGame()
+        {
+            ServiceLocator.ServiceLocatorInstance.PerGameData.Pause.IsPaused = false;
+            _viewVisualizer.Hide<GameOverView>();
         }
 
         private void RetryGame()

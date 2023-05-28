@@ -1,5 +1,6 @@
 ﻿using BlackBall.Audio;
 using BlackBall.Services;
+using BlackBall.Services.Ads;
 using BlackBall.Services.SaveLoad;
 using BlackBall.Services.SaveLoad.Serialization;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace BlackBall
             SceneLoader = Object.FindObjectOfType<SceneLoaderAsync>();
             SaveLoader.TryCreateSaveFile();
             SaveLoader.Load(null, PlayerData);
+            AdsService = Object.FindObjectOfType<AdsService>();
         }
 
         public PerGameData PerGameData { get; }
@@ -27,5 +29,6 @@ namespace BlackBall
         public ISaveLoader SaveLoader { get; }
         public SoundsPlayer SoundsPlayer { get; }
         public SceneLoaderAsync SceneLoader { get; }
+        public IAdsService AdsService { get; }
     }
 }

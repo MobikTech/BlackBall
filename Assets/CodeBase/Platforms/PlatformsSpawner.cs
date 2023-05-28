@@ -14,12 +14,13 @@ namespace BlackBall.Platforms
     public class PlatformsSpawner : MonoBehaviourCached
     {
         public event Action<PlatformBase>? PlatformSpawned;
-        private List<PlatformBase> _activePlatforms = null!;
-        
+        public PlatformBase LowestPlatform => _activePlatforms.Last();
+
         [SerializeField] private Field _field = null!;
         [SerializeField] private List<PlatformSpawnSettingInfo> _spawnSettingsInfo = null!;
         [SerializeField] private BonusSpawner _bonusSpawner = null!;
 
+        private List<PlatformBase> _activePlatforms = null!;
         private PlatformFactory _platformFactory = null!;
         private PlatformsSpawnSettings _currentPlatformsSpawnSettings;
         private int _nextSpawnSettings;
