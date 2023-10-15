@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4726768546862316085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409323015115554141}
+  - component: {fileID: 6285197293835963759}
+  m_Layer: 0
+  m_Name: BallSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1409323015115554141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726768546862316085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6285197293835963759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726768546862316085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf02e6f3421db714587261c8111e4fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allPossiblePrefabs:
+  - {fileID: 8334070471622398119, guid: e18409d7542b80d4cb7997b33dd48654, type: 3}
+  - {fileID: 8334070471622398119, guid: c129dc4767ee5f042bcb8637095678a7, type: 3}
+  - {fileID: 8334070471622398119, guid: be5a6dfd7c5393c4caa44c3611478957, type: 3}
+  - {fileID: 8334070471622398119, guid: 3d1c9ae523635794da3f5e4b5f93356a, type: 3}
+  - {fileID: 8334070471622398119, guid: d1c7c9bdb8627e349ad62dced8071ccb, type: 3}
+  - {fileID: 8334070471622398119, guid: 7f6b93d87db366e408bdaac2b4e16947, type: 3}
+  spawnPosition: {x: 0, y: 0.873, z: 0}

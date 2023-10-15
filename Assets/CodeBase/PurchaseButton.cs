@@ -5,7 +5,6 @@ using BlackBall.Services.PerGameServices;
 using BlackBall.Services.SaveLoad;
 using TMPro;
 
-
 namespace BlackBall
 {
     public class PurchaseButton : MonoBehaviour, IPersistentData
@@ -17,8 +16,8 @@ namespace BlackBall
         public Button purchaseButton;
         public TextMeshProUGUI buttonText;
         
-        public SpriteRenderer ballSpriteRenderer;
-        public Sprite[] ballSprites;
+        public BallSpawn ballSpawn;
+        [SerializeField] public GameObject[] customPrefabs; // Этот массив будет назначен из инспектора
         
         public int[] objectPrices;
         private int loadMooney;
@@ -52,40 +51,44 @@ namespace BlackBall
 
         private void HandlePurchaseOrSelect()
         {
+            GameObject prefabToSpawn;
+
+            if (customPrefabs != null && customPrefabs.Length > snapScrolling.selectedBallID && customPrefabs[snapScrolling.selectedBallID] != null)
+            {
+                prefabToSpawn = customPrefabs[snapScrolling.selectedBallID];
+            } else
+            {
+                prefabToSpawn = snapScrolling.ballPrefabs[snapScrolling.selectedBallID];
+            }
+
             if (purchasedItems[snapScrolling.selectedBallID])
             {
                 if (snapScrolling.selectedBallID == selectedBallID)
                     return;
-                ChangeSprite(snapScrolling.selectedBallID);
+
                 selectedBallID = snapScrolling.selectedBallID;
+                ballSpawn.SetPrefabToSpawn(prefabToSpawn);
             } else
             {
                 if (loadMooney >= objectPrices[snapScrolling.selectedBallID])
                 {
                     loadMooney -= objectPrices[snapScrolling.selectedBallID];
                     purchasedItems[snapScrolling.selectedBallID] = true;
-                    ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(null,this);
-                }  else
+                    ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(null, this);
+                } else
                 {
                     UnityEngine.Debug.Log("not money");
                 }
             }
+
             selectedBallID = snapScrolling.selectedBallID;
+            string selectedPrefabName = customPrefabs[selectedBallID].name;
+            PlayerPrefs.SetString("SelectedBallPrefabName", selectedPrefabName);
+            PlayerPrefs.Save();
             ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(null,this);
         }
-        
-        private void ChangeSprite(int id)
-        {
-            if (ballSpriteRenderer && ballSprites.Length > id)
-            {
-                ballSpriteRenderer.sprite = ballSprites[id];
-            } else
-            {
-                UnityEngine.Debug.LogWarning("Cannot change sprite. Check if references are set.");
-            }
-        }
-        
-        public void LoadData (Data data)
+
+        public void LoadData(Data data)
         { 
             loadMooney = data.CurrentMoney;
             if (data.PurchasedBalls != null && data.PurchasedBalls.Length > 0)
@@ -98,10 +101,9 @@ namespace BlackBall
             if (data.SelectedBallID >= 0 && data.SelectedBallID < snapScrolling.ballCount)
             {
                 selectedBallID = data.SelectedBallID;
-                ChangeSprite(selectedBallID);
             }
         }
-        public void SaveData (ref Data data)
+        public void SaveData(ref Data data)
         {
             data.CurrentMoney = loadMooney;
             data.PurchasedBalls = purchasedItems;

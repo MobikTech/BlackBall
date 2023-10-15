@@ -27,6 +27,14 @@ namespace BlackBall
         {
             _playerInput = GetComponent<PlayerInput>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            if (!_camera)
+            {
+                _camera = Camera.main;
+                if (!_camera)
+                {
+                   UnityEngine.Debug.Log("Camera is not set!");
+                }
+            }
         }
 
         private void Update()

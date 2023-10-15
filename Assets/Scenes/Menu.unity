@@ -27208,6 +27208,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopView
       objectReference: {fileID: 0}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8334070471622398119, guid: e18409d7542b80d4cb7997b33dd48654, type: 3}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8334070471622398119, guid: c129dc4767ee5f042bcb8637095678a7, type: 3}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8334070471622398119, guid: be5a6dfd7c5393c4caa44c3611478957, type: 3}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 8334070471622398119, guid: 3d1c9ae523635794da3f5e4b5f93356a, type: 3}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 8334070471622398119, guid: d1c7c9bdb8627e349ad62dced8071ccb, type: 3}
+    - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: customPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 8334070471622398119, guid: 7f6b93d87db366e408bdaac2b4e16947, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
