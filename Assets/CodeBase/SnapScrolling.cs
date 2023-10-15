@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ namespace BlackBall
     [Range(0, 20), Header("Scale speed")]
     public float scaleSpeed;
     [Header("Other objects")]
-    public GameObject ballPrefab;
+    public List<GameObject> ballPrefabs;
     public ScrollRect ScrollRect;
 
     private GameObject [] balls;
@@ -28,7 +29,7 @@ namespace BlackBall
     private Vector2 contentVector;
 
     private bool isScrolling;
-    private int selectedBallID;
+    public int selectedBallID;
 
     private void Start()
     {
@@ -37,16 +38,14 @@ namespace BlackBall
       ballPositions = new Vector2[ballCount];
       ballScale = new Vector2[ballCount];
 
-      for (int i = 0; i < ballCount; i++)
+      for (int i = 0; i < ballCount && i < ballPrefabs.Count; i++)
       {
-        balls[i] = Instantiate(ballPrefab, transform, false);
-
+        balls[i] = Instantiate(ballPrefabs[i], transform, false);
         if (i > 0)
         {
-          balls[i].transform.localPosition = new Vector2(balls[i - 1].transform.localPosition.x + ballPrefab.GetComponent<RectTransform>().sizeDelta.x + ballOffset,
+          balls[i].transform.localPosition = new Vector2(balls[i - 1].transform.localPosition.x + ballPrefabs[i].GetComponent<RectTransform>().sizeDelta.x + ballOffset,
             balls[i].transform.localPosition.y);
         }
-
         ballPositions[i] = -balls[i].transform.localPosition;
       }
     }
