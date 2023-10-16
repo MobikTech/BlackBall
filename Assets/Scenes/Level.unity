@@ -7608,7 +7608,7 @@ MonoBehaviour:
   - {fileID: 265490674}
   - {fileID: 618236200}
   _pauseButton: {fileID: 265490671}
-  _ballSpawn: {fileID: 1520942349}
+  _ballSpawner: {fileID: 1520942349}
 --- !u!1001 &889898104
 PrefabInstance:
   m_ObjectHideFlags: 0

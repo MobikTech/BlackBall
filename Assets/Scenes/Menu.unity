@@ -22011,7 +22011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1688001815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27208,6 +27208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopView
       objectReference: {fileID: 0}
+    - target: {fileID: 6308296295744321470, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6320759218845145380, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
       propertyPath: customPrefabs.Array.size
       value: 6
@@ -27236,6 +27240,38 @@ PrefabInstance:
       propertyPath: customPrefabs.Array.data[5]
       value: 
       objectReference: {fileID: 8334070471622398119, guid: 7f6b93d87db366e408bdaac2b4e16947, type: 3}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballCount>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 3899070435307538564, guid: e18d4c0da4ab010459496844c8da3eaf, type: 3}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 3899070435307538564, guid: f06d9a1b9e6cce74d8fe69c7a405e429, type: 3}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 3899070435307538564, guid: 3fa5644c4cbc5344187ee19027428e82, type: 3}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.data[3]
+      value: 
+      objectReference: {fileID: 3899070435307538564, guid: 8b9e70f353814d741a68887839ce2d5b, type: 3}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.data[4]
+      value: 
+      objectReference: {fileID: 3899070435307538564, guid: 71aebc04b164cae4eaf9151a3172bcc0, type: 3}
+    - target: {fileID: 7463520047469849345, guid: 98383c4f49b87b448ac57aed931410c0, type: 3}
+      propertyPath: <ballPrefabs>k__BackingField.Array.data[5]
+      value: 
+      objectReference: {fileID: 3899070435307538564, guid: 5201378b1a44f0848ba5053d0e5e7804, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

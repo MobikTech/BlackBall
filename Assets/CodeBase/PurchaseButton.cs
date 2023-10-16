@@ -7,22 +7,25 @@ using TMPro;
 
 namespace BlackBall
 {
-    public class PurchaseButton : MonoBehaviour, IPersistentData
+    public class PurchaseButton : MonoBehaviour, IPersistentData, IScrollable
     {
-        public SnapScrolling snapScrolling;
+        public  SnapScrolling snapScrolling;
 
         public bool[]? purchasedItems;
         
         public Button purchaseButton;
         public TextMeshProUGUI buttonText;
         
-        public BallSpawn ballSpawn;
-        [SerializeField] public GameObject[] customPrefabs; // Этот массив будет назначен из инспектора
+        public BallSpawner ballSpawn;
+        public GameObject[] customPrefabs;
         
         public int[] objectPrices;
         private int loadMooney;
         
         private int selectedBallID = -1;
+        int IScrollable.selectedBallID => selectedBallID;
+        GameObject[] IScrollable.ballPrefabs => customPrefabs ?? snapScrolling.ballPrefabs;
+        int IScrollable.ballCount => customPrefabs?.Length ?? snapScrolling.ballCount;
 
         private void Start()
         {
@@ -31,78 +34,78 @@ namespace BlackBall
 
         private void Update()
         {
-            if (purchasedItems != null && snapScrolling != null)
-            {
-                if (purchasedItems[snapScrolling.selectedBallID])
-                {
-                    if (snapScrolling.selectedBallID == selectedBallID)
-                    {
-                        buttonText.text = "Selected";
-                    } else
-                    {
-                        buttonText.text = "Select";
-                    }
-                } else
-                {
-                    buttonText.text = "Buy";
-                }
-            }
+            UpdateButtonText();
+        }
+
+        private void UpdateButtonText()
+        {
+            if (purchasedItems == null || snapScrolling == null) return;
+            
+            buttonText.text = purchasedItems[snapScrolling.selectedBallID] 
+                ? (snapScrolling.selectedBallID == selectedBallID ? "Selected" : "Select") 
+                : "Buy";
         }
 
         private void HandlePurchaseOrSelect()
         {
-            GameObject prefabToSpawn;
-
-            if (customPrefabs != null && customPrefabs.Length > snapScrolling.selectedBallID && customPrefabs[snapScrolling.selectedBallID] != null)
-            {
-                prefabToSpawn = customPrefabs[snapScrolling.selectedBallID];
-            } else
-            {
-                prefabToSpawn = snapScrolling.ballPrefabs[snapScrolling.selectedBallID];
-            }
-
+            GameObject prefabToSpawn = GetPrefabToSpawn();
+            
             if (purchasedItems[snapScrolling.selectedBallID])
             {
-                if (snapScrolling.selectedBallID == selectedBallID)
-                    return;
-
-                selectedBallID = snapScrolling.selectedBallID;
-                ballSpawn.SetPrefabToSpawn(prefabToSpawn);
-            } else
+                SelectBall(prefabToSpawn);
+            }
+            else
             {
-                if (loadMooney >= objectPrices[snapScrolling.selectedBallID])
-                {
-                    loadMooney -= objectPrices[snapScrolling.selectedBallID];
-                    purchasedItems[snapScrolling.selectedBallID] = true;
-                    ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(null, this);
-                } else
-                {
-                    UnityEngine.Debug.Log("not money");
-                }
+                PurchaseBall();
             }
 
+            SaveCurrentState();
+        }
+
+        private GameObject GetPrefabToSpawn()
+        {
+            if (customPrefabs != null && customPrefabs.Length > snapScrolling.selectedBallID && customPrefabs[snapScrolling.selectedBallID] != null)
+            {
+                return customPrefabs[snapScrolling.selectedBallID];
+            }
+            return snapScrolling.ballPrefabs[snapScrolling.selectedBallID];
+        }
+
+        private void SelectBall(GameObject prefabToSpawn)
+        {
+            if (snapScrolling.selectedBallID == selectedBallID) return;
+            
             selectedBallID = snapScrolling.selectedBallID;
-            string selectedPrefabName = customPrefabs[selectedBallID].name;
-            PlayerPrefs.SetString("SelectedBallPrefabName", selectedPrefabName);
-            PlayerPrefs.Save();
-            ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(null,this);
+        }
+
+        private void PurchaseBall()
+        {
+            if (loadMooney < objectPrices[snapScrolling.selectedBallID]) 
+            {
+                UnityEngine.Debug.Log("not money");
+                return;
+            }
+
+            loadMooney -= objectPrices[snapScrolling.selectedBallID];
+            purchasedItems[snapScrolling.selectedBallID] = true;
+        }
+
+        private void SaveCurrentState()
+        {
+            
+            ServiceLocator.ServiceLocatorInstance.SaveLoader.Save(null, this);
         }
 
         public void LoadData(Data data)
-        { 
+        {
             loadMooney = data.CurrentMoney;
-            if (data.PurchasedBalls != null && data.PurchasedBalls.Length > 0)
-            {
-                purchasedItems = data.PurchasedBalls;
-            } else
-            {
-                purchasedItems = new bool[snapScrolling.ballCount];
-            }
+            purchasedItems = data.PurchasedBalls ?? new bool[snapScrolling.ballCount];
             if (data.SelectedBallID >= 0 && data.SelectedBallID < snapScrolling.ballCount)
             {
                 selectedBallID = data.SelectedBallID;
             }
         }
+
         public void SaveData(ref Data data)
         {
             data.CurrentMoney = loadMooney;

@@ -11,19 +11,19 @@ namespace BlackBall.UI.Views.LevelScene
         public override Type ActualType => typeof(GameplayView);
 
         [SerializeField] private Button _pauseButton = null!;
-        [SerializeField] private BallSpawn _ballSpawn = null!;
+        [SerializeField] private BallSpawner _ballSpawner = null!;
 
         public override void Initialize()
         {
             _pauseButton.onClick.AddListener(PauseGame);
     
-            if (_ballSpawn.SpawnedBallController != null)
+            if (_ballSpawner.SpawnedBallController != null)
             {
-                _ballSpawn.SpawnedBallController.Died += OnBallDied;
+                _ballSpawner.SpawnedBallController.Died += OnBallDied;
             }
             else
             {
-                _ballSpawn.BallSpawned += HandleBallSpawned;
+                _ballSpawner.BallSpawned += HandleBallSpawned;
             }
         }
 

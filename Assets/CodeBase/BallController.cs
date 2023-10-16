@@ -35,6 +35,14 @@ namespace BlackBall
                    UnityEngine.Debug.Log("Camera is not set!");
                 }
             }
+            if (!_platformsSpawner)
+            {
+                _platformsSpawner = FindObjectOfType<PlatformsSpawner>();
+                if (!_platformsSpawner)
+                {
+                    UnityEngine.Debug.Log("PlatformsSpawner is not set!");
+                }
+            }
         }
 
         private void Update()

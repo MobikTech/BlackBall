@@ -1,14 +1,15 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace BlackBall
 {
-  public class SnapScrolling : MonoBehaviour
+  public class SnapScrolling : MonoBehaviour, IScrollable
   {
-    [Range(1, 50), Header("Number of balls")]
-    public int ballCount;
+    [field: Range(1, 50),Header("Number of balls"),SerializeField]
+    public int ballCount { get;private set; }
     [Range(0, 100), Header("Distance between balls")]
     public float ballOffset;
     [Range(0, 20), Header("Snap speed")]
@@ -17,8 +18,8 @@ namespace BlackBall
     public float scaleOffset;
     [Range(0, 20), Header("Scale speed")]
     public float scaleSpeed;
-    [Header("Other objects")]
-    public List<GameObject> ballPrefabs;
+    [field: Header("Other objects"),SerializeField]
+    public GameObject [] ballPrefabs { get;private set; }
     public ScrollRect ScrollRect;
 
     private GameObject [] balls;
@@ -29,7 +30,7 @@ namespace BlackBall
     private Vector2 contentVector;
 
     private bool isScrolling;
-    public int selectedBallID;
+    public int selectedBallID{get;private set;}
 
     private void Start()
     {
@@ -38,7 +39,7 @@ namespace BlackBall
       ballPositions = new Vector2[ballCount];
       ballScale = new Vector2[ballCount];
 
-      for (int i = 0; i < ballCount && i < ballPrefabs.Count; i++)
+      for (int i = 0; i < ballCount && i < ((ICollection)ballPrefabs).Count; i++)
       {
         balls[i] = Instantiate(ballPrefabs[i], transform, false);
         if (i > 0)

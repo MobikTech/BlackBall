@@ -1,23 +1,20 @@
 using System;
 using BlackBall;
+using BlackBall.Services.SaveLoad;
 using UnityEngine;
 
-public class BallSpawn : MonoBehaviour
+public class BallSpawner : MonoBehaviour, IPersistentData
 {
   [SerializeField] private GameObject[] allPossiblePrefabs;
   private GameObject prefabToSpawn;
-  [SerializeField] private Vector3 spawnPosition = Vector3.zero; // Позиция, где вы хотите спавнить префаб
+  [SerializeField] private Vector3 spawnPosition = Vector3.zero;
 
   public BallController? SpawnedBallController { get; private set; }
 
   public event Action<BallController> BallSpawned;
-  private void Start()
+  public void Start()
   {
-    string selectedPrefabName = PlayerPrefs.GetString("SelectedBallPrefabName", "");
-    if(!string.IsNullOrEmpty(selectedPrefabName))
-    {
-      prefabToSpawn = Array.Find(allPossiblePrefabs, prefab => prefab.name == selectedPrefabName);
-    }
+    ServiceLocator.ServiceLocatorInstance.SaveLoader.Load(null, this);
     if(prefabToSpawn != null)
     {
       GameObject spawnedBall = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
@@ -34,9 +31,14 @@ public class BallSpawn : MonoBehaviour
     }
     BallSpawned?.Invoke(SpawnedBallController);
   }
-  
-  public void SetPrefabToSpawn(GameObject newPrefab)
+
+  public void LoadData (Data data)
   {
-    prefabToSpawn = newPrefab;
+    prefabToSpawn = allPossiblePrefabs[data.SelectedBallID];
+  }
+
+  public void SaveData (ref Data data)
+  {
+    throw new NotImplementedException();
   }
 }
